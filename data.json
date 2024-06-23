@@ -1,18 +1,18 @@
 [
     {
-        "url": "images/Gucci-Mane.jpg",
+        "url": "image/Gucci-Mane.jpg",
         "alt": "Gucci Mane"
     },
     {
-        "url": "images/Pooh-Shiesty.jpeg",
+        "url": "image/Pooh-Shiesty.jpeg",
         "alt": "Pooh Shiesty"
     },
     {
-        "url": "images/Scarr.jpg",
+        "url": "image/Scarr.jpg",
         "alt": "Big Scarr"
     },
     {
-        "url": "images/Foogiano.jpg",
+        "url": "image/Foogiano.jpg",
         "alt": "Foogiano"
     }
 ]
