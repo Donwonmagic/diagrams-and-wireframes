@@ -6,67 +6,77 @@
     <title>Landing Page</title>
     <style>
         body {
-            font-family: Verdana, sans-serif;
-            background-color: #ffffff;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f8f8f8;
         }
         .container {
-            position: relative;
-            width: 1100px;
-            height: 850px;
+            width: 80%;
             margin: 0 auto;
-            border: 1px solid #000000;
+            padding: 20px;
         }
-        .icon-box {
-            position: absolute;
-            top: 130px;
-            left: 365px;
-            width: 370px;
-            height: 259px;
-            border: 1px solid #999999;
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
-        .text-box {
-            position: absolute;
-            top: 425px;
-            left: 530px;
-            width: 20px;
-            height: 20px;
-            font-size: 14px;
-            font-family: Verdana;
-            text-align: left;
-            vertical-align: top;
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .text-box-large {
-            position: absolute;
-            top: 420.5px;
-            left: 562px;
-            width: 100px;
-            height: 35px;
-            font-size: 24px;
-            font-family: Verdana;
-            text-align: left;
-            vertical-align: top;
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-        .title-box {
-            position: absolute;
-            top: 530px;
-            left: 345px;
-            width: 395px;
-            height: 30px;
-            font-size: 28px;
-            font-family: Verdana;
-            text-align: left;
-            vertical-align: top;
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <div class="icon-box"></div>
-        <div class="text-box"><u>es</u></div>
-        <div class="text-box-large"><font style="font-size: 24px;">Angelita</font></div>
-        <div class="title-box">Learn More About the Artist</div>
+        <h1>Image Gallery</h1>
+        <div id="gallery" class="gallery"></div>
     </div>
+        
+    <script>
+        // Step 1 - Define function that renders data within a template literal describing our HTML
+        function displayGallery(data) {
+            data.forEach((image) => {
+                    
+                // Create a new div for each image
+                let imageDiv = document.createElement('div');
+                    
+                // Update template and add it to the new DOM element
+                imageDiv.innerHTML = `
+                    <img src="${image.url}" alt="${image.alt}">
+                `; 
+    
+                // Append the new DOM element to the HTML already on the page
+                document.getElementById('gallery').appendChild(imageDiv);
+            });
+        }
+            
+        // Step 2 - Retrieve data
+        fetch('images.json')
+            .then(response => response.json())
+            .then(data => {
+                // Store the JSON data in a variable
+                let jsonData = data;
+    
+                // Debug - Output the JSON data to the console
+                console.log(jsonData);
+    
+                // Step 3 - Display the data on the webpage
+                displayGallery(jsonData);
+            })
+        .catch(error => console.error('Error fetching JSON:', error));
+    </script>
 </body>
-</html>
